@@ -136,13 +136,27 @@ public class TicTacToeBoard {
     return diagonalSums;
   }
 
+  /**
+   * Evaluates if either side has won through a row completion. Assigns if x won to first element of
+   * returned array, assigns if o won to second element of returned array.
+   *
+   * @param boardLength the length of the board the game is played on
+   * @return boolean array of size 2 where the first element contains the result of if x won and the
+   * second contains the result of if o won
+   */
   public boolean[] rowWinner(int boardLength) {
+    // array storing results to return
     boolean[] winners = new boolean[2];
+    // the total on each row where one is added for an x piece, -1 is for an o piece and 0 is for
+    // anything else
     int rowSum = 0;
 
     for (int i = 0; i < board.length(); i++) {
       char current = board.charAt(i);
+      // if we are on a new row (if the current index is a multiple of the board length) check the
+      // rowSum and reset it to 0 after
       if (i % boardLength == 0) {
+        // if every value added was a 1 or every value added was a -1 we found a winner
         if (rowSum == boardLength) {
           winners[0] = true;
         } else if (rowSum == -1 * boardLength) {
@@ -150,6 +164,7 @@ public class TicTacToeBoard {
         }
         rowSum = 0;
       }
+      // increment the rowSum based on the current character
       if (current == 'X' || current == 'x') {
         rowSum++;
       } else if (current == 'O' || current == 'o') {
@@ -157,6 +172,7 @@ public class TicTacToeBoard {
       }
     }
 
+    // the last row isn't evaluated in the loop so we check it here
     if (rowSum == boardLength) {
       winners[0] = true;
     } else if (rowSum == -1 * boardLength) {
@@ -166,12 +182,24 @@ public class TicTacToeBoard {
     return winners;
   }
 
+  /**
+   * Check if either side has won by completing a column. Assigns if x won to first element of
+   * returned array, assigns if o won to second element of returned array.
+   *
+   * @param boardLength the length of the board the game is played on
+   * @return boolean array of size 2 where the first element contains the result of if x won and the
+   * second contains the result of if o won
+   */
   public boolean[] columnWinner(int boardLength) {
+    // store the sum of values in each column, with 1 added for x, -1 for o, and 0 for anything else
     int[] columnSum = new int[boardLength];
+    // array storing results to return
     boolean[] winners = new boolean[2];
 
     for (int i = 0; i < board.length(); i++) {
       char current = board.charAt(i);
+      // the column number is the remainder after dividing the current index with the board length,
+      // we increment and decrement appropriately
       if (current == 'X' || current == 'x') {
         columnSum[i % boardLength]++;
       } else if (current == 'O' || current == 'o') {
@@ -179,6 +207,8 @@ public class TicTacToeBoard {
       }
     }
 
+    // go through each column to see if there are any where every value summed is 1, or every value
+    // summed is -1, as this means we found a winner
     for (int i = 0; i < columnSum.length; i++) {
       if (columnSum[i] == boardLength) {
         winners[0] = true;

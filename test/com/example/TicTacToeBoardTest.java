@@ -57,4 +57,15 @@ public class TicTacToeBoardTest {
     board = new TicTacToeBoard(".XO.XO..O");
     assertEquals(Evaluation.Owins, board.evaluate());
   }
+
+  @Test(expected = IllegalArgumentException.class)
+  public void testInvalidBoardLengthException(){
+    TicTacToeBoard board = new TicTacToeBoard("O.XOX.OXO.");
+    board.evaluate();
+  }
+
+  @Test
+  public void testEvaluatingLowerCaseAndUpperCase(){
+
+  }
 }
