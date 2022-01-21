@@ -9,4 +9,24 @@ public class TicTacToeBoardTest {
     TicTacToeBoard board = new TicTacToeBoard("O...X.X..");
     assertEquals(Evaluation.NoWinner, board.evaluate());
   }
+
+  @Test
+  public void testInvalidBoardLargeDifferenceXO(){
+
+  }
+
+  @Test
+  public void testInvalidBoardBothWinners(){
+
+  }
+
+  @Test
+  public void testValidBoardXWins(){
+
+  }
+
+  @Test
+  public void testValidBoardOWins(){
+
+  }
 }
