@@ -95,12 +95,10 @@ public class TicTacToeBoard {
   public boolean[] rowWinner(int boardLength) {
     boolean[] winners = new boolean[2];
     int rowSum = 0;
-    int rowNum = 0;
 
     for (int i = 0; i < board.length(); i++) {
       char current = board.charAt(i);
       if (i % boardLength == 0) {
-        rowNum++;
         if (rowSum == boardLength) {
           winners[0] = true;
         } else if (rowSum == -1 * boardLength) {
@@ -113,6 +111,12 @@ public class TicTacToeBoard {
       } else if (current == 'O' || current == 'o') {
         rowSum--;
       }
+    }
+    
+    if (rowSum == boardLength) {
+      winners[0] = true;
+    } else if (rowSum == -1 * boardLength) {
+      winners[1] = true;
     }
 
     return winners;
