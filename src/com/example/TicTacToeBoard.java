@@ -67,7 +67,7 @@ public class TicTacToeBoard {
 
   public int[] sumDiagonals(int boardLength) {
     int[] diagonalSums = new int[2];
-    int rowNum = 0;
+    int rowNum = -1;
 
     for (int i = 0; i < board.length(); i++) {
       char current = board.charAt(i);
@@ -112,7 +112,7 @@ public class TicTacToeBoard {
         rowSum--;
       }
     }
-    
+
     if (rowSum == boardLength) {
       winners[0] = true;
     } else if (rowSum == -1 * boardLength) {

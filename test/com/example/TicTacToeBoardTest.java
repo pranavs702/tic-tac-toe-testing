@@ -33,4 +33,10 @@ public class TicTacToeBoardTest {
     TicTacToeBoard board = new TicTacToeBoard("OOOXX....");
     assertEquals(Evaluation.Owins, board.evaluate());
   }
+
+  @Test
+  public void testValidBoardWinLeftDiagonal(){
+    TicTacToeBoard board = new TicTacToeBoard("OO.XOX.XO");
+    assertEquals(Evaluation.Owins, board.evaluate());
+  }
 }
