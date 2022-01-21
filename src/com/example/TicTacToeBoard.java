@@ -31,21 +31,23 @@ public class TicTacToeBoard {
     boolean[] columnWinners = columnWinner(n);
     boolean[] rowWinners = rowWinner(n);
     int[] diagonalSum = sumDiagonals(n);
-    boolean xWon = columnWinners[0] || rowWinners[0] || diagonalSum[0]==n || diagonalSum[1]==n;
-    boolean oWon = columnWinners[1] || rowWinners[1] || diagonalSum[0]==-n || diagonalSum[1]==-n;
+    boolean xWon = columnWinners[0] || rowWinners[0] || diagonalSum[0] == n || diagonalSum[1] == n;
+    boolean oWon =
+        columnWinners[1] || rowWinners[1] || diagonalSum[0] == -n || diagonalSum[1] == -n;
     boolean invalid = checkInvalid(n);
 
-    if(invalid || xWon && oWon)
+    if (invalid || xWon && oWon) {
       return Evaluation.UnreachableState;
-    else if(xWon)
+    } else if (xWon) {
       return Evaluation.Xwins;
-    else if(oWon)
+    } else if (oWon) {
       return Evaluation.Owins;
-    else
+    } else {
       return Evaluation.NoWinner;
+    }
   }
 
-  public boolean checkInvalid(int n){
+  public boolean checkInvalid(int n) {
     int x = 0;
     int o = 0;
 
@@ -58,10 +60,10 @@ public class TicTacToeBoard {
       }
     }
 
-    return Math.abs(x-o)>1;
+    return Math.abs(x - o) > 1;
   }
 
-  public int[] sumDiagonals(int n){
+  public int[] sumDiagonals(int n) {
     int[] diagonalSums = new int[2];
     int rowNum = 0;
 
@@ -88,7 +90,7 @@ public class TicTacToeBoard {
     return diagonalSums;
   }
 
-  public boolean[] rowWinner(int n){
+  public boolean[] rowWinner(int n) {
     boolean[] winners = new boolean[2];
     int rowSum = 0;
     int rowNum = 0;
