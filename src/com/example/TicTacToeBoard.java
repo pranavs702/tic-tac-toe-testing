@@ -88,6 +88,32 @@ public class TicTacToeBoard {
     return diagonalSums;
   }
 
+  public boolean[] rowWinner(int n){
+    boolean[] winners = new boolean[2];
+    int rowSum = 0;
+    int rowNum = 0;
+
+    for (int i = 0; i < board.length(); i++) {
+      char current = board.charAt(i);
+      if (i % n == 0) {
+        rowNum++;
+        if (rowSum == n) {
+          winners[0] = true;
+        } else if (rowSum == -1 * n) {
+          winners[1] = true;
+        }
+        rowSum = 0;
+      }
+      if (current == 'X' || current == 'x') {
+        rowSum++;
+      } else if (current == 'O' || current == 'o') {
+        rowSum--;
+      }
+    }
+
+    return winners;
+  }
+
   public boolean[] columnWinner(int n) {
     int[] columnSum = new int[n];
     boolean[] winners = new boolean[2];
