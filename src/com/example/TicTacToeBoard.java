@@ -22,21 +22,23 @@ public class TicTacToeBoard {
    * @return an enum value corresponding to the board evaluation
    */
   public Evaluation evaluate() {
-    int n = (int) Math.sqrt(board.length());
+    int boardLength = (int) Math.sqrt(board.length());
 
-    if (n * n != board.length()) {
+    if (boardLength * boardLength != board.length()) {
       throw new IllegalArgumentException();
     }
 
-    boolean[] columnWinners = columnWinner(n);
-    boolean[] rowWinners = rowWinner(n);
-    int[] diagonalSum = sumDiagonals(n);
-    boolean xWon = columnWinners[0] || rowWinners[0] || diagonalSum[0] == n || diagonalSum[1] == n;
+    boolean[] columnWinners = columnWinner(boardLength);
+    boolean[] rowWinners = rowWinner(boardLength);
+    int[] diagonalSum = sumDiagonals(boardLength);
+    boolean xWon = columnWinners[0] || rowWinners[0] || diagonalSum[0] == boardLength
+        || diagonalSum[1] == boardLength;
     boolean oWon =
-        columnWinners[1] || rowWinners[1] || diagonalSum[0] == -n || diagonalSum[1] == -n;
-    boolean invalid = checkInvalid(n);
+        columnWinners[1] || rowWinners[1] || diagonalSum[0] == -boardLength
+            || diagonalSum[1] == -boardLength;
+    boolean invalidBoard = checkInvalid(boardLength);
 
-    if (invalid || xWon && oWon) {
+    if (invalidBoard || xWon && oWon) {
       return Evaluation.UnreachableState;
     } else if (xWon) {
       return Evaluation.Xwins;
@@ -47,41 +49,41 @@ public class TicTacToeBoard {
     }
   }
 
-  public boolean checkInvalid(int n) {
-    int x = 0;
-    int o = 0;
+  public boolean checkInvalid(int boardLength) {
+    int numX = 0;
+    int numO = 0;
 
     for (int i = 0; i < board.length(); i++) {
       char current = board.charAt(i);
       if (current == 'X' || current == 'x') {
-        x++;
+        numX++;
       } else if (current == 'O' || current == 'o') {
-        o++;
+        numO++;
       }
     }
 
-    return Math.abs(x - o) > 1;
+    return Math.abs(numX - numO) > 1;
   }
 
-  public int[] sumDiagonals(int n) {
+  public int[] sumDiagonals(int boardLength) {
     int[] diagonalSums = new int[2];
     int rowNum = 0;
 
     for (int i = 0; i < board.length(); i++) {
       char current = board.charAt(i);
-      if (i % n == 0) {
+      if (i % boardLength == 0) {
         rowNum++;
       }
       if (current == 'X' || current == 'x') {
-        if (i % n == rowNum) {
+        if (i % boardLength == rowNum) {
           diagonalSums[0]++;
-        } else if (i % n == n - rowNum - 1) {
+        } else if (i % boardLength == boardLength - rowNum - 1) {
           diagonalSums[1]++;
         }
       } else if (current == 'O' || current == 'o') {
-        if (i % n == rowNum) {
+        if (i % boardLength == rowNum) {
           diagonalSums[0]--;
-        } else if (i % n == n - rowNum - 1) {
+        } else if (i % boardLength == boardLength - rowNum - 1) {
           diagonalSums[1]--;
         }
       }
@@ -90,18 +92,18 @@ public class TicTacToeBoard {
     return diagonalSums;
   }
 
-  public boolean[] rowWinner(int n) {
+  public boolean[] rowWinner(int boardLength) {
     boolean[] winners = new boolean[2];
     int rowSum = 0;
     int rowNum = 0;
 
     for (int i = 0; i < board.length(); i++) {
       char current = board.charAt(i);
-      if (i % n == 0) {
+      if (i % boardLength == 0) {
         rowNum++;
-        if (rowSum == n) {
+        if (rowSum == boardLength) {
           winners[0] = true;
-        } else if (rowSum == -1 * n) {
+        } else if (rowSum == -1 * boardLength) {
           winners[1] = true;
         }
         rowSum = 0;
@@ -116,23 +118,23 @@ public class TicTacToeBoard {
     return winners;
   }
 
-  public boolean[] columnWinner(int n) {
-    int[] columnSum = new int[n];
+  public boolean[] columnWinner(int boardLength) {
+    int[] columnSum = new int[boardLength];
     boolean[] winners = new boolean[2];
 
     for (int i = 0; i < board.length(); i++) {
       char current = board.charAt(i);
       if (current == 'X' || current == 'x') {
-        columnSum[i % n]++;
+        columnSum[i % boardLength]++;
       } else if (current == 'O' || current == 'o') {
-        columnSum[i % n]--;
+        columnSum[i % boardLength]--;
       }
     }
 
     for (int i = 0; i < columnSum.length; i++) {
-      if (columnSum[i] == n) {
+      if (columnSum[i] == boardLength) {
         winners[0] = true;
-      } else if (columnSum[i] == -1 * n) {
+      } else if (columnSum[i] == -1 * boardLength) {
         winners[1] = true;
       }
     }
