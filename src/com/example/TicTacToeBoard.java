@@ -30,6 +30,23 @@ public class TicTacToeBoard {
       throw new IllegalArgumentException();
     }
 
-    return Evaluation.NoWinner;
+    int[] columnSum = columnSum(n);
+
+    return Evaluation.UnreachableState;
+  }
+
+  public int[] columnSum(int n) {
+    int[] cols = new int[n];
+
+    for (int i = 0; i < board.length(); i++) {
+      char current = board.charAt(i);
+      if (current == 'X' || current == 'x') {
+        cols[i % n]++;
+      } else if (current == 'O' || current == 'o') {
+        cols[i % n]--;
+      }
+    }
+
+    return cols;
   }
 }
