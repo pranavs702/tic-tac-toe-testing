@@ -45,6 +45,22 @@ public class TicTacToeBoard {
       return Evaluation.NoWinner;
   }
 
+  public boolean checkInvalid(int n){
+    int x = 0;
+    int o = 0;
+
+    for (int i = 0; i < board.length(); i++) {
+      char current = board.charAt(i);
+      if (current == 'X' || current == 'x') {
+        x++;
+      } else if (current == 'O' || current == 'o') {
+        o++;
+      }
+    }
+
+    return Math.abs(x-o)>1;
+  }
+
   public boolean[] columnWinner(int n) {
     int[] columnSum = new int[n];
     boolean[] winners = new boolean[2];
