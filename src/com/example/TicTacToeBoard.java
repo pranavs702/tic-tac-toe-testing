@@ -61,6 +61,33 @@ public class TicTacToeBoard {
     return Math.abs(x-o)>1;
   }
 
+  public int[] sumDiagonals(int n){
+    int[] diagonalSums = new int[2];
+    int rowNum = 0;
+
+    for (int i = 0; i < board.length(); i++) {
+      char current = board.charAt(i);
+      if (i % n == 0) {
+        rowNum++;
+      }
+      if (current == 'X' || current == 'x') {
+        if (i % n == rowNum) {
+          diagonalSums[0]++;
+        } else if (i % n == n - rowNum - 1) {
+          diagonalSums[1]++;
+        }
+      } else if (current == 'O' || current == 'o') {
+        if (i % n == rowNum) {
+          diagonalSums[0]--;
+        } else if (i % n == n - rowNum - 1) {
+          diagonalSums[1]--;
+        }
+      }
+    }
+
+    return diagonalSums;
+  }
+
   public boolean[] columnWinner(int n) {
     int[] columnSum = new int[n];
     boolean[] winners = new boolean[2];
