@@ -1,9 +1,11 @@
 package com.example;
 
 import org.junit.Test;
+
 import static org.junit.Assert.assertEquals;
 
 public class TicTacToeBoardTest {
+
   @Test
   public void testValidBoardNoWinner() {
     TicTacToeBoard board = new TicTacToeBoard("O...X.X..");
@@ -11,38 +13,48 @@ public class TicTacToeBoardTest {
   }
 
   @Test
-  public void testInvalidBoardLargeDifferenceXO(){
+  public void testInvalidBoardLargeDifferenceXO() {
     TicTacToeBoard board = new TicTacToeBoard("OOO.XOX..");
     assertEquals(Evaluation.UnreachableState, board.evaluate());
   }
 
   @Test
-  public void testInvalidBoardBothWinners(){
+  public void testInvalidBoardBothWinners() {
     TicTacToeBoard board = new TicTacToeBoard("OOO.XOXXX");
     assertEquals(Evaluation.UnreachableState, board.evaluate());
   }
 
   @Test
-  public void testValidBoardXWins(){
+  public void testValidBoardXWins() {
     TicTacToeBoard board = new TicTacToeBoard("O.O.O.XXX");
     assertEquals(Evaluation.Xwins, board.evaluate());
   }
 
   @Test
-  public void testValidBoardOWins(){
+  public void testValidBoardOWins() {
     TicTacToeBoard board = new TicTacToeBoard("OOOXX....");
     assertEquals(Evaluation.Owins, board.evaluate());
   }
 
   @Test
-  public void testValidBoardWinLeftDiagonal(){
+  public void testValidBoardWinLeftDiagonal() {
     TicTacToeBoard board = new TicTacToeBoard("OO.XOX.XO");
     assertEquals(Evaluation.Owins, board.evaluate());
   }
 
   @Test
-  public void testValidBoardWinRightDiagonal(){
+  public void testValidBoardWinRightDiagonal() {
     TicTacToeBoard board = new TicTacToeBoard("O.XOX.XOO");
     assertEquals(Evaluation.Xwins, board.evaluate());
+  }
+
+  @Test
+  public void testValidBoardWinColumns() {
+    TicTacToeBoard board = new TicTacToeBoard("O.XOX.OXO");
+    assertEquals(Evaluation.Owins, board.evaluate());
+    board = new TicTacToeBoard(".OX.O..OX");
+    assertEquals(Evaluation.Owins, board.evaluate());
+    board = new TicTacToeBoard(".XO.XO..O");
+    assertEquals(Evaluation.Owins, board.evaluate());
   }
 }
