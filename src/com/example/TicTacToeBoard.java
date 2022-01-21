@@ -77,13 +77,15 @@ public class TicTacToeBoard {
       if (current == 'X' || current == 'x') {
         if (i % boardLength == rowNum) {
           diagonalSums[0]++;
-        } else if (i % boardLength == boardLength - rowNum - 1) {
+        }
+        if (i % boardLength == boardLength - rowNum - 1) {
           diagonalSums[1]++;
         }
       } else if (current == 'O' || current == 'o') {
         if (i % boardLength == rowNum) {
           diagonalSums[0]--;
-        } else if (i % boardLength == boardLength - rowNum - 1) {
+        }
+        if (i % boardLength == boardLength - rowNum - 1) {
           diagonalSums[1]--;
         }
       }
