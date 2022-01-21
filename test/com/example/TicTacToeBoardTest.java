@@ -66,6 +66,7 @@ public class TicTacToeBoardTest {
 
   @Test
   public void testEvaluatingLowerCaseAndUpperCase(){
-
+    TicTacToeBoard board = new TicTacToeBoard("O.XoX.OxO");
+    assertEquals(Evaluation.Owins, board.evaluate());
   }
 }
