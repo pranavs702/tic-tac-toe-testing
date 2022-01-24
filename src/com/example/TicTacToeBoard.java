@@ -5,7 +5,7 @@ package com.example;
  */
 public class TicTacToeBoard {
 
-  private String board = "";
+  private String board;
 
   /**
    * This method should load a string into your TicTacToeBoard class.
@@ -17,7 +17,8 @@ public class TicTacToeBoard {
   }
 
   /**
-   * Checks the state of the board (unreachable, no winner, X wins, or O wins)
+   * Checks the state of the board (unreachable, no winner, X wins, or O wins), assuming that the
+   * board is square.
    *
    * @return an enum value corresponding to the board evaluation
    */
@@ -74,7 +75,7 @@ public class TicTacToeBoard {
    * @param boardLength the length of the board the game is played on
    * @return boolean true if the board is invalid, false otherwise
    */
-  public boolean checkInvalid(int boardLength) {
+  private boolean checkInvalid(int boardLength) {
     int numX = 0; // number of x marks
     int numO = 0; // number of o marks
 
@@ -101,7 +102,7 @@ public class TicTacToeBoard {
    * @return int[] array of size 2 where the first value is the sum of the diagonal starting top
    * left and the second value is the sum of the diagonal starting top right
    */
-  public int[] sumDiagonals(int boardLength) {
+  private int[] sumDiagonals(int boardLength) {
     // store the sums of both diagonals
     int[] diagonalSums = new int[2];
     // the row we are evaluating, this value gets immediately incremented in the
@@ -144,7 +145,7 @@ public class TicTacToeBoard {
    * @return boolean array of size 2 where the first element contains the result of if x won and the
    * second contains the result of if o won
    */
-  public boolean[] rowWinner(int boardLength) {
+  private boolean[] rowWinner(int boardLength) {
     // array storing results to return
     boolean[] winners = new boolean[2];
     // the total on each row where one is added for an x piece, -1 is for an o piece and 0 is for
@@ -190,7 +191,7 @@ public class TicTacToeBoard {
    * @return boolean array of size 2 where the first element contains the result of if x won and the
    * second contains the result of if o won
    */
-  public boolean[] columnWinner(int boardLength) {
+  private boolean[] columnWinner(int boardLength) {
     // store the sum of values in each column, with 1 added for x, -1 for o, and 0 for anything else
     int[] columnSum = new int[boardLength];
     // array storing results to return
