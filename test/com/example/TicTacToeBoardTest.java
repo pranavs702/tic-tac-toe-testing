@@ -4,6 +4,9 @@ import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
 
+/**
+ * Tests the evaluate() function of TicTacToeBoard.java assuming that only square boards are valid.
+ */
 public class TicTacToeBoardTest {
 
   /**
