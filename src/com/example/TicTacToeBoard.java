@@ -210,10 +210,10 @@ public class TicTacToeBoard {
 
     // go through each column to see if there are any where every value summed is 1, or every value
     // summed is -1, as this means we found a winner
-    for (int i = 0; i < columnSum.length; i++) {
-      if (columnSum[i] == boardLength) {
+    for (int j : columnSum) {
+      if (j == boardLength) {
         winners[0] = true;
-      } else if (columnSum[i] == -1 * boardLength) {
+      } else if (j == -1 * boardLength) {
         winners[1] = true;
       }
     }
