@@ -5,7 +5,7 @@ package com.example;
  */
 public class TicTacToeBoard {
 
-  private String board;
+  private final String BOARD_TEXT;
 
   /**
    * This method should load a string into your TicTacToeBoard class.
@@ -13,7 +13,7 @@ public class TicTacToeBoard {
    * @param board The string representing the board
    */
   public TicTacToeBoard(String board) {
-    this.board = board;
+    this.BOARD_TEXT = board;
   }
 
   /**
@@ -24,11 +24,11 @@ public class TicTacToeBoard {
    */
   public Evaluation evaluate() {
     // the length of the board (the board is a boardLength by boardLength square)
-    int boardLength = (int) Math.sqrt(board.length());
+    int boardLength = (int) Math.sqrt(BOARD_TEXT.length());
 
     // if the area of the board isn't the rounded down length, then we have an invalid board,
     // as the board area must be a square
-    if (boardLength * boardLength != board.length()) {
+    if (boardLength * boardLength != BOARD_TEXT.length()) {
       throw new IllegalArgumentException();
     }
 
@@ -79,8 +79,8 @@ public class TicTacToeBoard {
     int numX = 0; // number of x marks
     int numO = 0; // number of o marks
 
-    for (int i = 0; i < board.length(); i++) {
-      char current = board.charAt(i);
+    for (int i = 0; i < BOARD_TEXT.length(); i++) {
+      char current = BOARD_TEXT.charAt(i);
       if (current == 'X' || current == 'x') { // we found an x mark
         numX++;
       } else if (current == 'O' || current == 'o') { // we found an o mark
@@ -109,8 +109,8 @@ public class TicTacToeBoard {
     // loop and we want to start at 0 so we initialize it as -1
     int rowNum = -1;
 
-    for (int i = 0; i < board.length(); i++) {
-      char current = board.charAt(i);
+    for (int i = 0; i < BOARD_TEXT.length(); i++) {
+      char current = BOARD_TEXT.charAt(i);
       // if we are starting a new row (reading a multiple of the board length) increment row number
       if (i % boardLength == 0) {
         rowNum++;
@@ -152,8 +152,8 @@ public class TicTacToeBoard {
     // anything else
     int rowSum = 0;
 
-    for (int i = 0; i < board.length(); i++) {
-      char current = board.charAt(i);
+    for (int i = 0; i < BOARD_TEXT.length(); i++) {
+      char current = BOARD_TEXT.charAt(i);
       // if we are on a new row (if the current index is a multiple of the board length) check the
       // rowSum and reset it to 0 after
       if (i % boardLength == 0) {
@@ -197,8 +197,8 @@ public class TicTacToeBoard {
     // array storing results to return
     boolean[] winners = new boolean[2];
 
-    for (int i = 0; i < board.length(); i++) {
-      char current = board.charAt(i);
+    for (int i = 0; i < BOARD_TEXT.length(); i++) {
+      char current = BOARD_TEXT.charAt(i);
       // the column number is the remainder after dividing the current index with the board length,
       // we increment and decrement appropriately
       if (current == 'X' || current == 'x') {
