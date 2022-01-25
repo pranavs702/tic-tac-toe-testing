@@ -10,12 +10,21 @@ import static org.junit.Assert.assertEquals;
 public class TicTacToeBoardTest {
 
   /**
+   * Helper method to verify if passing the string input to the TicTacToeBoard class results in evaluate() returning the correct evaluation.
+   *
+   * @param input String input to the TicTacToeBoard class
+   * @param correct Evaluation that the TicTacToeBoard class's evaluate() method should return
+   */
+  public void checkEquals(String input, Evaluation correct){
+    TicTacToeBoard board = new TicTacToeBoard(input);
+    assertEquals(correct, board.evaluate());
+  }
+  /**
    * Test if the correct result is returned when there is no winner but the board is valid.
    */
   @Test
   public void testValidBoardNoWinner() {
-    TicTacToeBoard board = new TicTacToeBoard("O...X.X..");
-    assertEquals(Evaluation.NoWinner, board.evaluate());
+    checkEquals("O...X.X..", Evaluation.NoWinner);
   }
 
   /**
@@ -24,8 +33,7 @@ public class TicTacToeBoardTest {
    */
   @Test
   public void testInvalidBoardLargeDifferenceXO() {
-    TicTacToeBoard board = new TicTacToeBoard("OOO.XOX..");
-    assertEquals(Evaluation.UnreachableState, board.evaluate());
+    checkEquals("OOO.XOX..", Evaluation.UnreachableState);
   }
 
   /**
@@ -34,8 +42,7 @@ public class TicTacToeBoardTest {
    */
   @Test
   public void testInvalidBoardBothWinners() {
-    TicTacToeBoard board = new TicTacToeBoard("OOO.XOXXX");
-    assertEquals(Evaluation.UnreachableState, board.evaluate());
+    checkEquals("OOO.XOXXX", Evaluation.UnreachableState);
   }
 
   /**
@@ -43,8 +50,7 @@ public class TicTacToeBoardTest {
    */
   @Test
   public void testValidBoardXWins() {
-    TicTacToeBoard board = new TicTacToeBoard("O.O.O.XXX");
-    assertEquals(Evaluation.Xwins, board.evaluate());
+    checkEquals("O.O.O.XXX", Evaluation.Xwins);
   }
 
   /**
@@ -52,8 +58,7 @@ public class TicTacToeBoardTest {
    */
   @Test
   public void testValidBoardOWins() {
-    TicTacToeBoard board = new TicTacToeBoard("OOOXX....");
-    assertEquals(Evaluation.Owins, board.evaluate());
+    checkEquals("OOOXX....", Evaluation.Owins);
   }
 
   /**
@@ -62,8 +67,7 @@ public class TicTacToeBoardTest {
    */
   @Test
   public void testValidBoardWinLeftDiagonal() {
-    TicTacToeBoard board = new TicTacToeBoard("OO.XOX.XO");
-    assertEquals(Evaluation.Owins, board.evaluate());
+    checkEquals("OO.XOX.XO", Evaluation.Owins);
   }
 
   /**
@@ -72,8 +76,7 @@ public class TicTacToeBoardTest {
    */
   @Test
   public void testValidBoardWinRightDiagonal() {
-    TicTacToeBoard board = new TicTacToeBoard("O.XOX.XOO");
-    assertEquals(Evaluation.Xwins, board.evaluate());
+    checkEquals("O.XOX.XOO", Evaluation.Xwins);
   }
 
   /**
@@ -82,14 +85,13 @@ public class TicTacToeBoardTest {
   @Test
   public void testValidBoardWinColumns() {
     // first column
-    TicTacToeBoard board = new TicTacToeBoard("O.XOX.OXO");
-    assertEquals(Evaluation.Owins, board.evaluate());
+    checkEquals("O.XOX.OXO", Evaluation.Owins);
+
     // second column
-    board = new TicTacToeBoard(".OX.O..OX");
-    assertEquals(Evaluation.Owins, board.evaluate());
+    checkEquals(".OX.O..OX", Evaluation.Owins);
+
     // third column
-    board = new TicTacToeBoard(".XO.XO..O");
-    assertEquals(Evaluation.Owins, board.evaluate());
+    checkEquals(".XO.XO..O", Evaluation.Owins);
   }
 
   /**
@@ -98,14 +100,13 @@ public class TicTacToeBoardTest {
   @Test
   public void testValidBoardWinRows() {
     // first row
-    TicTacToeBoard board = new TicTacToeBoard("OOOXX.X..");
-    assertEquals(Evaluation.Owins, board.evaluate());
+    checkEquals("OOOXX.X..", Evaluation.Owins);
+
     // second row
-    board = new TicTacToeBoard(".XXOOO.XX");
-    assertEquals(Evaluation.Owins, board.evaluate());
+    checkEquals(".XXOOO.XX", Evaluation.Owins);
+
     // third row
-    board = new TicTacToeBoard(".X.XX.OOO");
-    assertEquals(Evaluation.Owins, board.evaluate());
+    checkEquals(".X.XX.OOO", Evaluation.Owins);
   }
 
   /**
@@ -125,8 +126,7 @@ public class TicTacToeBoardTest {
    */
   @Test
   public void testEvaluatingLowerCaseAndUpperCase() {
-    TicTacToeBoard board = new TicTacToeBoard("O.XoX.OxO");
-    assertEquals(Evaluation.Owins, board.evaluate());
+    checkEquals("O.XoX.OxO", Evaluation.Owins);
   }
 
   /**
@@ -135,7 +135,6 @@ public class TicTacToeBoardTest {
    */
   @Test
   public void testEvaluatingVariousEmptyPlaceholder() {
-    TicTacToeBoard board = new TicTacToeBoard("OaXoX*OxO");
-    assertEquals(Evaluation.Owins, board.evaluate());
+    checkEquals("OaXoX*OxO", Evaluation.Owins);
   }
 }
