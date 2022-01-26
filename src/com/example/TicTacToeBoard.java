@@ -76,14 +76,19 @@ public class TicTacToeBoard {
    * @return boolean true if the board is invalid, false otherwise
    */
   private boolean checkInvalid(int boardLength) {
-    int numX = 0; // number of x marks
-    int numO = 0; // number of o marks
+    // number of x marks
+    int numX = 0;
+    // number of o marks
+    int numO = 0;
 
     for (int i = 0; i < BOARD_TEXT.length(); i++) {
       char current = BOARD_TEXT.charAt(i);
-      if (current == 'X' || current == 'x') { // we found an x mark
+      // we found an x mark
+      if (current == 'X' || current == 'x') {
         numX++;
-      } else if (current == 'O' || current == 'o') { // we found an o mark
+      }
+      // we found an o mark
+      else if (current == 'O' || current == 'o') {
         numO++;
       }
     }
